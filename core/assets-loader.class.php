@@ -99,7 +99,7 @@ class AssetsLoader {
          * Styles
          */
         wp_enqueue_style( 'ramp_assessment_style_public', Functions::assets_url( '/public/dist/css/style.css' ), [], $this->version );
-        // wp_enqueue_script( 'ramp_assessment_style_script_public', Functions::assets_url( '/public/dist/css/style.js' ), [], $this->version ); // In development
+        wp_enqueue_script( 'ramp_assessment_style_script_public', Functions::assets_url( '/public/dist/css/style.js' ), [], $this->version ); // In development
 
         /**
          * Scripts
@@ -126,6 +126,7 @@ class AssetsLoader {
      */
     public function localization(){
         return [
+            'post_type' => get_post_type(),
             'ajax_url' => admin_url( 'admin-ajax.php' ),
             'public_assets_url' => Functions::assets_url(),
             'ajax_nonce' => wp_create_nonce( 'ramp_assessment_ajax_nonce' ),

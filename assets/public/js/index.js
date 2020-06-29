@@ -2,16 +2,18 @@ import initGraphic from './graphic/index';
 import initForms from './forms/index';
 
 function init() {
-  try {
-    initGraphic();
-  } catch (error) {
-    console.log('erroor', error);
-  }
-
-  try {
-    initForms();
-  } catch (error) {
-    console.log('erroor', error);
+  if (RAMP_ASSESSMENT.post_type === 'ramp_assessment') {
+    console.log('ENTREEEEEEEEEEEE ASSESSMENT');
+    try {
+      initGraphic();
+    } catch (error) {
+      console.log('erroor', error);
+    }
+    try {
+      initForms();
+    } catch (error) {
+      console.log('erroor', error);
+    }
   }
 }
 

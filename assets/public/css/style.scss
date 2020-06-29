@@ -67,9 +67,6 @@ $blue: #25335a;
 
     .quform-inner.quform-inner-radio {
       .quform-options {
-        display: flex;
-        justify-content: space-between;
-
         .quform-option {
           text-align: left;
           width: 100%;
@@ -91,11 +88,12 @@ $blue: #25335a;
   }
 
   .quform-button-submit {
-    .quform-submit {
-      background: #eb4745;
-      padding: 14px 15px;
+    .quform-submit,
+    .quform_submit{
+      background: #eb4745 !important;
+      padding: 14px 15px !important;
       text-align: center;
-      border-radius: 40px;
+      border-radius: 40px !important;
       width: 100%;
       display: block;
       color: white;
@@ -256,9 +254,9 @@ $blue: #25335a;
       :after {
         content: "";
         background: linear-gradient(
-          90deg,
-          rgba(246, 246, 246, 1) 0%,
-          rgba(232, 232, 232, 1) 100%
+                        90deg,
+                        rgba(246, 246, 246, 1) 0%,
+                        rgba(232, 232, 232, 1) 100%
         );
         display: block;
         height: 2px;
@@ -286,20 +284,7 @@ $blue: #25335a;
       display: flex;
       flex-direction: column;
 
-      #result_score_day__date {
-        font-size: 14px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 10px;
-        color: $blue;
 
-        span {
-          margin-bottom: 5px;
-          margin-right: 10px;
-          color: #165a6b;
-        }
-      }
     }
 
     .detail {
@@ -319,6 +304,48 @@ $blue: #25335a;
         display: block;
         color: white;
         text-transform: uppercase;
+      }
+    }
+
+
+    .chart-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+
+      div {
+        color: #25335A;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        span:first-child {
+          font-size: 20px;
+        }
+
+        span:last-child {
+          font-size: 11px;
+        }
+      }
+    }
+
+    #result_score_day__date {
+      font-size: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0;
+      color: $blue;
+
+
+      span {
+        margin-bottom: 5px;
+        margin-right: 10px;
+        color: #165a6b;
+      }
+
+      input{
+        background: transparent;
       }
     }
   }

@@ -6,15 +6,15 @@ const $ = jQuery;
 
 export default () => {
   moment.tz.setDefault('America/Vancouver');
-  
+
   /**
     * Calcute days week
   */
   var firstDate = moment().day(1).format('MM-DD-YYYY');
-  var lastDate = moment().day(7).format('MM-DD-YYYY');  
-  
+  var lastDate = moment().day(7).format('MM-DD-YYYY');
+
   const setDatePicker = () => {
-    
+
     $("#weeklyDatePicker").val(firstDate + ' - ' +lastDate);
 
     function style_init() {
@@ -59,7 +59,7 @@ export default () => {
         },
         onOpen:function() {
           style_select(firstDate);
-          
+
         },
         onSet:function(context) {
           firstDate = moment(context.select).day(1).format("MM-DD-YYYY");
@@ -78,19 +78,10 @@ export default () => {
             initBar(firstDate, lastDate);
         }
     });
-  }
-
-  const setDateRange = () => {
-    $('#result_score_day__date').remove();
-    $(`#result_score_day`).append(`<div id="result_score_day__date">
-      <span class="dashicons dashicons-calendar-alt"></span>
-      <input type="text" id="weeklyDatePicker" style="width:242px" placeholder="Select Week"/>
-    </div>`);
-  }
+  };
 
   initLine(firstDate, lastDate);
   initPie(firstDate, lastDate);
   initBar(firstDate, lastDate);
-  setDateRange();
   setDatePicker();
 };

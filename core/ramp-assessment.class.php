@@ -21,7 +21,6 @@ class RampAssessment {
      */
     public function __construct( $config_ramp_assessment ){
         $this->config_ramp_assessment = $config_ramp_assessment;
-        $this->init_auto_update();
         $this->hooks();
         $this->load_classes();
     }
@@ -35,20 +34,6 @@ class RampAssessment {
         new AssetsLoader( $this->config_ramp_assessment['version'] );
     }
 
-    /**
-     * Base for auto update plugin functionality
-     *
-     * @since Ramp assessment 0.0.1
-     */
-    public function init_auto_update(){
-        /*
-            $myUpdateChecker = \Puc_v4_Factory::buildUpdateChecker(
-            'http://wpbot_dialogflowplugin.xyz/updates/?action=get_metadata&slug=wpbot_dialogflow',
-            IHO_DEVCORT_BASE_PHP_DIR,
-            $this->>config_ramp_assessment['slug']
-            );
-         */
-    }
 
     /**
      * Load hooks
@@ -94,12 +79,7 @@ class RampAssessment {
             'label' => __( 'ramp_assessment', RAMP_ASSESSMENT_TEXT_DOMAIN ),
             'description' => __( 'Assessment', RAMP_ASSESSMENT_TEXT_DOMAIN ),
             'labels' => $labels,
-            // Features this CPT supports in Post Editor
             'supports' => array( 'title', 'thumbnail' ),
-            /* A hierarchical CPT is like Pages and can have
-            * Parent and child items. A non-hierarchical CPT
-            * is like Posts.
-            */
             'hierarchical' => false,
             'public' => true,
             'show_ui' => true,
@@ -254,16 +234,16 @@ class RampAssessment {
                 $has_response_today = isset( $user_responses_serialized[$page_id][$form_id]['responses'][$current_date] );
 
                 if( ! $has_response_today && $_GET['start'] == 'now' ){
-                    include_once 'html_includes/symptom_diary/symptom_diary_form.php';
+                    include_once 'html_includes/assessment/assessment_form.php';
                 } else{
-                    $description = $xbox->get_field_value( 'description', $diary->ID, '' );
+                    $description = $xbox->get_field_value( 'description', '', '' );
                     $data_forms = QuestionnairePage::get_questions_and_options_of_forms( true );
                     if( isset( $user_responses_serialized[$page_id][$form_id] ) ){
                         $response_json = isset( $user_responses_serialized[$page_id][$form_id] ) ? json_encode( $user_responses_serialized[$page_id][$form_id] ) : '{}';
                         $charts_json = json_encode( $charts_data );
                         $data_forms_json = json_encode( $data_forms[$form_id] );
                     }
-                    include_once 'html_includes/symptom_diary/symptom_diary_resume.php';
+                    include_once 'html_includes/assessment/assessment_resume.php';
                 }
             }
         }
