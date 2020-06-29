@@ -1,0 +1,8 @@
+**/node_modules
+.cache/
+yarn-error.log
+*.lock
+dist/
+
+libs/xbox/backups/*
+!libs/xbox/backups/.gitkeep

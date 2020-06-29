@@ -1,0 +1,325 @@
+@import "forms/pain_assessment_tool";
+
+$blue: #25335a;
+
+.ramp_assessment {
+  .entry-content-wrap {
+    padding-top: 0 !important;
+  }
+
+  .entry-media {
+    display: none;
+  }
+
+  /**
+    Quform
+   */
+  .quform-element-page {
+    margin-bottom: 80px;
+  }
+
+  .quform-element {
+    .quform-label label {
+      color: $blue;
+      font-size: 16px;
+    }
+
+    .quform-option label {
+      color: $blue;
+      font-size: 15px;
+    }
+
+    .quform-inner.quform-inner-checkbox,
+    .quform-inner.quform-inner-radio {
+      .quform-option {
+        margin: 15px 0;
+      }
+
+      label {
+        position: relative;
+        margin-left: 25px;
+        display: block;
+
+        &:before {
+          position: absolute;
+          top: 5px;
+          left: -25px;
+          content: "";
+          width: 18px;
+          height: 18px;
+          border: 2px solid $blue;
+          border-radius: 2px;
+        }
+      }
+
+      input {
+        display: none;
+
+        &:checked + label {
+          color: #44b4b8;
+
+          &:before {
+            border-color: #44b4b8;
+          }
+        }
+      }
+    }
+
+    .quform-inner.quform-inner-radio {
+      .quform-options {
+        display: flex;
+        justify-content: space-between;
+
+        .quform-option {
+          text-align: left;
+          width: 100%;
+        }
+      }
+
+      input {
+        display: none;
+
+        &:checked + label {
+          color: #d82020;
+
+          &:before {
+            border-color: #d82020;
+          }
+        }
+      }
+    }
+  }
+
+  .quform-button-submit {
+    .quform-submit {
+      background: #eb4745;
+      padding: 14px 15px;
+      text-align: center;
+      border-radius: 40px;
+      width: 100%;
+      display: block;
+      color: white;
+      text-transform: uppercase;
+    }
+  }
+
+  /**
+    Helpers
+   */
+  .quform-form-inner,
+  .quform .quform-element {
+    position: static;
+  }
+
+  .quform-loading {
+    display: none !important;
+  }
+
+  .quform-inner {
+    //margin: 20px;
+  }
+
+  .quform .quform-elements {
+    //margin-bottom: 30vh;
+  }
+
+  .quform-edit-form {
+    position: absolute;
+    bottom: -100px;
+    left: 0;
+    padding: 10px;
+  }
+
+  /**
+    Percentage number
+   */
+
+  .quform-page-progress.quform-page-progress-type-percentage {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: block;
+    margin-bottom: 0;
+
+    .quform-page-progress-completed {
+      font-size: 11px;
+    }
+
+    .quform-page-progress-bar {
+      background: transparent;
+      width: 100% !important;
+      font-size: 30px;
+      font-weight: bolder;
+      color: #165a6b;
+
+      @media (max-width: 425px) {
+        font-size: 20px;
+      }
+
+      .quform-page-progress-percentage {
+        font-size: 40px;
+      }
+    }
+  }
+
+  /**
+    Submit button
+   */
+
+  .quform-element.quform-element-submit {
+    position: absolute;
+    margin: 0;
+    bottom: 0;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+
+    .quform-button-back,
+    .quform-button-next,
+    .quform-button-submit {
+      margin: 0;
+    }
+
+    .quform-button-back {
+      margin-bottom: 5px !important;
+    }
+
+    .quform-button-next,
+    .quform-button-submit {
+      margin-left: 0;
+    }
+
+    button {
+      background: #eb4745;
+      padding: 14px 15px;
+      text-align: center;
+      border-radius: 40px;
+      width: 100%;
+      display: block;
+      color: white;
+      text-transform: uppercase;
+      min-width: 160px;
+      @media (max-width: 320px) {
+        padding: 10px 20px;
+      }
+    }
+  }
+
+  /**
+    Error messages
+   */
+  .quform-error.quform-cf {
+    .quform-error-inner {
+      background: transparent;
+      font-size: 1.6rem;
+    }
+
+    &:before {
+      content: none;
+    }
+  }
+
+  #weeklyDatePicker {
+    border: 0px;
+    cursor: pointer;
+  }
+}
+
+.ramp_assessment_page {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #bbbbbb;
+    margin-bottom: 20px;
+
+    .options__text {
+      color: #44b4b8;
+      font-size: 22px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .last_completed__text {
+      color: $blue;
+      font-size: 12px;
+    }
+  }
+
+  &__list {
+    &__item {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 0;
+      color: $blue;
+      position: relative;
+
+      :after {
+        content: "";
+        background: linear-gradient(
+          90deg,
+          rgba(246, 246, 246, 1) 0%,
+          rgba(232, 232, 232, 1) 100%
+        );
+        display: block;
+        height: 2px;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+
+      .symptom__text {
+        font-weight: bold;
+        font-size: 24px;
+      }
+
+      .date__text {
+        font-size: 13px;
+      }
+    }
+  }
+
+  &__detail {
+    #result_score_day {
+      background: white;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+
+      #result_score_day__date {
+        font-size: 14px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+        color: $blue;
+
+        span {
+          margin-bottom: 5px;
+          margin-right: 10px;
+          color: #165a6b;
+        }
+      }
+    }
+
+    .detail {
+      &__description {
+        font-size: 14px;
+        text-align: justify;
+        color: $blue;
+        margin-bottom: 20px;
+      }
+
+      &__start {
+        background: #eb4745;
+        padding: 14px 15px;
+        text-align: center;
+        border-radius: 40px;
+        width: 100%;
+        display: block;
+        color: white;
+        text-transform: uppercase;
+      }
+    }
+  }
+}

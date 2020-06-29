@@ -1,0 +1,26 @@
+{
+  "name": "ramp_assessment",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-preset-env": "^1.7.0",
+    "node-sass": "^4.13.1",
+    "parcel-bundler": "^1.12.4"
+  },
+  "scripts": {
+    "start": "parcel ./js/index.js ./css/style.scss --log-level 3",
+    "build": "parcel build ./js/index.js ./css/style.scss"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "global": "^4.4.0",
+    "highcharts": "^8.1.2",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.31",
+    "parcel": "^1.12.4",
+    "uuid": "^7.0.2"
+  }
+}
