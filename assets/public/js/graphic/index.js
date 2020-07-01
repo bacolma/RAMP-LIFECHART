@@ -14,21 +14,8 @@ export default () => {
   var lastDate = moment().day(7).format('MM-DD-YYYY');
 
   const setDatePicker = () => {
-
+    
     $("#weeklyDatePicker").val(firstDate + ' - ' +lastDate);
-
-    function style_init() {
-      $(".picker__button--today").css('display','none');
-      $(".picker__button--clear").css('display','none');
-      $(".picker__button--close").css('width','100%');
-      $(".picker__button--close").css('background','#EB4745');
-      $(".picker__button--close").css('color','white');
-      $(".picker__button--close").css('border-radius','20px');
-      $(".picker__button--close").css('border-color','#EB4745');
-      $(".picker__button--close").css('margin-bottom','15px');
-      $(".picker__box").css('background','#25335A');
-      $(".picker__box").css('color','white');
-    }
 
     function style_select(firstDate) {
       for(var i = 0; i < 7; i ++){
@@ -36,12 +23,16 @@ export default () => {
         var firstDateNew = now.getTime();
         if(i == 0){
           $('#weeklyDatePicker_' + firstDateNew).css('background','#44B4B8');
-          $('#weeklyDatePicker_' + firstDateNew).css('border-radius', '10px 0px 0px 10px');
+          $('#weeklyDatePicker_' + firstDateNew).css('border-radius', '20px');
+          $('#weeklyDatePicker_' + firstDateNew).parent('td').css('background','#1B97A2');
+          $('#weeklyDatePicker_' + firstDateNew).parent('td').css('border-radius', '20px 0px 0px 20px');
         }else if(i == 6){
           $('#weeklyDatePicker_' + firstDateNew).css('background','#44B4B8');
-          $('#weeklyDatePicker_' + firstDateNew).css('border-radius', '0px 10px 10px 0px');
+          $('#weeklyDatePicker_' + firstDateNew).css('border-radius', '20px');
+          $('#weeklyDatePicker_' + firstDateNew).parent('td').css('background','#1B97A2');
+          $('#weeklyDatePicker_' + firstDateNew).parent('td').css('border-radius', '0px 20px 20px 0px');
         }else{
-          $('#weeklyDatePicker_' + firstDateNew).css('background','rgba(48, 180, 184, 0.78)');
+          $('#weeklyDatePicker_' + firstDateNew).parent('td').css('background','#1B97A2');
         }
       }
     }
@@ -53,19 +44,14 @@ export default () => {
         closeOnSelect: false,
         closeOnClear: false,
         firstDay: 1,
-        close:'Select',
-        onStart:function() {
-          style_init();
-        },
+        close:'SELECT',
         onOpen:function() {
           style_select(firstDate);
-
         },
         onSet:function(context) {
           firstDate = moment(context.select).day(1).format("MM-DD-YYYY");
           lastDate = moment(context.select).day(7).format("MM-DD-YYYY");
           $('#weeklyDatePicker').val(firstDate+ " - " + lastDate);
-          style_init();
           style_select(firstDate);
         },
         onRender:function() {
@@ -78,7 +64,8 @@ export default () => {
             initBar(firstDate, lastDate);
         }
     });
-  };
+  }
+
 
   initLine(firstDate, lastDate);
   initPie(firstDate, lastDate);
