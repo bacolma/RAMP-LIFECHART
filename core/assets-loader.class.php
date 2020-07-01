@@ -99,7 +99,7 @@ class AssetsLoader {
          * Styles
          */
         wp_enqueue_style( 'ramp_assessment_style_public', Functions::assets_url( '/public/dist/css/style.css' ), [], $this->version );
-        wp_enqueue_script( 'ramp_assessment_style_script_public', Functions::assets_url( '/public/dist/css/style.js' ), [], $this->version ); // In development
+        // wp_enqueue_script( 'ramp_assessment_style_script_public', Functions::assets_url( '/public/dist/css/style.js' ), [], $this->version ); // In development
 
         /**
          * Scripts
