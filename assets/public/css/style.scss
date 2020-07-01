@@ -217,9 +217,65 @@ $blue: #25335a;
     }
   }
 
-  #weeklyDatePicker {
+  #weeklyDatePicker{
     border: 0px;
     cursor: pointer;
+  }
+  .picker__button--close{
+    width: 100%;
+    background: #EB4745;
+    color: white;
+    border-radius: 20px;
+    border-color: #EB4745;
+    margin-bottom: 15px;
+
+    &:hover{
+      background: #EB4745;
+      border-color: #EB4745;
+      color: white;
+    }
+  }
+  .picker__button--today{
+    display: none;
+  }
+  .picker__button--clear{
+    display: none;
+  }
+  .picker__button--close:before{
+    content: "";
+  }
+  .picker__box{
+    background: #25335A;
+    color: white;
+  }
+  .picker__day--today:before{
+    border-left: 0px;
+  }
+  .picker__year, .picker__month{
+    color: white;
+    font-size: 1em;
+    font-style: normal;
+  }
+  .picker__nav--prev{
+    border-radius: 30px;
+    background: #C7CCD4;
+    margin-left: 20px;
+    padding: 11px 13px 11px 11px;
+  }
+  .picker__nav--next{
+    border-radius: 30px;
+    background: #C7CCD4;
+    margin-right: 20px;
+    padding: 11px 11px 11px 13px;
+  }
+  .picker__weekday{
+    text-transform: uppercase;
+  }
+  .picker__day--outfocus{
+    color:#717684;
+  }
+  .picker__day{
+    font-size: 18px;
   }
 }
 
