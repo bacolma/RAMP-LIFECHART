@@ -71,7 +71,21 @@ export default (firstDate, lastDate) => {
             dateNow = moment(firstDate, "MM-DD-YYYY").add(i, 'd').format('MM-DD-YYYY');
             arr_categories[i] = dateNow;
           }
-          //console.log(arr_categories);
+          
+          /**
+           * calculate highest, lowest and latest
+           
+          var arr_response_all = [];
+          var arr_response_user = [];
+          console.log(user_responses['responses']);
+          console.log(arr_question_line);
+
+          for (var date in user_responses['responses']) {
+            for (var response in user_responses['responses'][date]) {
+              console.log(response);
+            }
+          }
+          */
 
           /**
            * get value by day of week
@@ -80,6 +94,9 @@ export default (firstDate, lastDate) => {
           var suma_date = 0;
           var count_semana = 0;
           arr_option_answer = [];
+          var highest = 0; // max value
+          var lowest = 0; // min value
+          var latest  = 0; // last value answer
 
           if (arr_option_list.length == 0) {
             arr_option_list[0] = 'line';
@@ -111,9 +128,40 @@ export default (firstDate, lastDate) => {
                 }
               }
               arr_option_answer[arr_option_list[option]][count_semana] = suma_date;
+              
+              // get highest
+              if(count_semana == 0){
+                highest = suma_date;
+              }else{
+                if(suma_date > highest){
+                  highest = suma_date;
+                }
+              }
+              
+              // get lowest
+              if(count_semana == 0){
+                lowest = suma_date;
+              }else{
+                if(suma_date < lowest){
+                  lowest = suma_date;
+                }
+              }
+
+              // get latest
+              if(suma_date != 0){
+                latest = suma_date;
+              }
+
               count_semana++;
             }
           }
+          
+          /**
+           * Print result of highest, lowest and latest
+           */
+          $('.highest').html(highest);
+          $('.lowest').html(lowest);
+          $('.latest').html(latest);
 
           /**
            * Get array text highchart

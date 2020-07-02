@@ -10,9 +10,9 @@
                 <div class="detail__description"><?= $description ?></div>
             <? endif; ?>
             <div class="chart-stats">
-                <div><span>-</span><span>HIGHEST</span></div>
-                <div><span>-</span><span>LOWEST</span></div>
-                <div><span>-</span><span>LATEST</span></div>
+                <div><span class="highest">-</span><span>HIGHEST</span></div>
+                <div><span class="lowest">-</span><span>LOWEST</span></div>
+                <div><span class="latest">-</span><span>LATEST</span></div>
             </div>
             <div id="result_score_day__date">
                 <span class="dashicons dashicons-calendar-alt"></span>
