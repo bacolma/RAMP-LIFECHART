@@ -46,14 +46,13 @@ export default (firstDate, lastDate) => {
                  * Get week days, star first week Monday
                  */
                 var arr_categories = [];
-                var arr_categories_char = [];
                 var dateNow = '';
-                var dateNowChar = '';
-                for (var i = 0; i < 7; i++) {
-                dateNow = moment(firstDate, "MM-DD-YYYY").add(i, 'd').format('MM-DD-YYYY');
-                arr_categories[i] = dateNow;
-                dateNowChar = moment(firstDate, "MM-DD-YYYY").add(i, 'd').format('dddd');
-                arr_categories_char[i] = '';
+                var first = moment(firstDate);
+                var second = moment(lastDate);
+                var between_days = second.diff(first, 'days');
+                for (var i = 0; i < between_days; i++) {
+                    dateNow = moment(firstDate, "MM-DD-YYYY").add(i, 'd').format('MM-DD-YYYY');
+                    arr_categories[i] = dateNow;
                 }
 
                 /**
@@ -129,7 +128,7 @@ export default (firstDate, lastDate) => {
                     text: ''
                 },
                 xAxis: {
-                    categories: arr_categories_char,
+                    categories: arr_categories,
                     crosshair: true,
                 },
                 yAxis: {

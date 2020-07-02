@@ -54,9 +54,6 @@ export default (firstDate, lastDate) => {
            */
           if ($("#dayli_form_graph_line_" + index_char).length == 0) {
             var div_char = document.createElement("div");
-            /*div_char.id = "dayli_form_graph_line_" + index_char;
-            var text = document.createTextNode("here char line " + index_char);
-            div_char.appendChild(text);*/
             div_char.innerHTML = "<div id='dayli_form_graph_line_" + index_char + "' style='max-width:800px; min-width: 300px; margin: 0 auto'></div>";
             var element = document.getElementById("result_score_day");
             element.appendChild(div_char);
@@ -66,15 +63,15 @@ export default (firstDate, lastDate) => {
            * Get week days, star first week Monday
            */
           var arr_categories = [];
-          var arr_categories_char = [];
           var dateNow = '';
-          var dateNowChar = '';
-          for (var i = 0; i < 7; i++) {
+          var first = moment(firstDate);
+          var second = moment(lastDate);
+          var between_days = second.diff(first, 'days');
+          for (var i = 0; i < between_days; i++) {
             dateNow = moment(firstDate, "MM-DD-YYYY").add(i, 'd').format('MM-DD-YYYY');
             arr_categories[i] = dateNow;
-            dateNowChar = moment(firstDate, "MM-DD-YYYY").add(i, 'd').format('dddd');
-            arr_categories_char[i] = dateNowChar;
           }
+          //console.log(arr_categories);
 
           /**
            * get value by day of week
@@ -161,7 +158,7 @@ export default (firstDate, lastDate) => {
               accessibility: {
                 rangeDescription: ''
               },
-              categories: arr_categories_char
+              categories: arr_categories
             },
             legend: {
               layout: 'vertical',

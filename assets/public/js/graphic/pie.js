@@ -48,7 +48,10 @@ export default (firstDate, lastDate) => {
              */
             var arr_categories = [];
             var dateNow = '';
-            for (var i = 0; i < 7; i++) {
+            var first = moment(firstDate);
+            var second = moment(lastDate);
+            var between_days = second.diff(first, 'days');
+            for (var i = 0; i < between_days; i++) {
                 dateNow = moment(lastDate, "MM-DD-YYYY").subtract(i, 'd').format('MM-DD-YYYY');
                 arr_categories[i] = dateNow;
             }
