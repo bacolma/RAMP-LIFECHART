@@ -211,10 +211,13 @@ class RampAssessment {
                 $form_id = $xbox->get_field_value( 'form', $page_id, [] );
                 $charts = $xbox->get_field_value( "charts-$form_id", $page_id, [] );
                 $charts_data = [];
+
                 foreach( $charts as $chart ){
                     $options = isset( $chart["options-$form_id"] ) ? $chart["options-$form_id"] : '';
                     $options_list = isset( $chart["list-$form_id-$options"] ) ? $chart["list-$form_id-$options"] : [];
                     $options_data = [];
+                    $sum_of_options = isset( $chart['sum-of-options'] ) ? $chart['sum-of-options'] == 'yes' : false;
+
                     foreach( $options_list as $option ){
                         $data = explode( '____', $option );
                         $options_data[$data[0]] = $data[1];
@@ -224,6 +227,7 @@ class RampAssessment {
                         'title' => isset( $chart['title'] ) ? $chart['title'] : '',
                         'options_list' => $options_data,
                         'legend' => isset( $chart['legend'] ) ? $chart['legend'] : 'no',
+                        'sum_of_options' => $sum_of_options,
                         'questions' => isset( $chart["question-$form_id"] ) ? $chart["question-$form_id"] : []
                     ];
                 }

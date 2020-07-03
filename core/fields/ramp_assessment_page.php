@@ -152,7 +152,20 @@ if( Functions::is_active_plugin_by_name( 'quform.php' ) ){
                         )
                     ] );
                 }
+
+                $group->add_field( [
+                    'id' => 'sum-of-options',
+                    'name' => __( 'Sum of options?', RAMP_ASSESSMENT_TEXT_DOMAIN ),
+                    'type' => 'radio',
+                    'default' => 'no',
+                    'items' => [
+                        'no' => 'No',
+                        'yes' => 'Yes',
+                    ],
+                ] );
             }
+
+
             $xbox->close_tab_item( 'info' );
             $xbox->open_tab_item( 'import-export' );
             $xbox->add_import_field( array(
