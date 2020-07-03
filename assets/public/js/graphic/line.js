@@ -23,14 +23,7 @@ export default (firstDate, lastDate) => {
         if (item['type'] == 'line') {
           arr_question_line = item['questions'];
           arr_option_list = item['options_list'];
-          is_lineal_number = false;
           title_char = item['title'];
-          for (const option in arr_option_list) {
-            if (parseInt(arr_option_list[option]) > 0) {
-              is_lineal_number = true;
-              break;
-            }
-          }
 
           /**
            * Valid legend
@@ -44,9 +37,17 @@ export default (firstDate, lastDate) => {
           /**
            * Valid only or all options
            */
-          if (is_lineal_number || arr_option_list.length == 0) {
+          if (arr_option_list.length == 0) {
             arr_option_list = [];
-            arr_option_list[0] = 'line';//add only option in char
+            arr_option_list[0] = 'count-more';//add only option in char
+          }
+
+          /**
+           * Valid only or all options
+           */
+          if (item['sum_of_options']) {
+            arr_option_list = [];
+            arr_option_list[0] = 'sum';//add only option in char
           }
 
           /**
@@ -71,21 +72,6 @@ export default (firstDate, lastDate) => {
             dateNow = moment(firstDate, "MM-DD-YYYY").add(i, 'd').format('MM-DD-YYYY');
             arr_categories[i] = dateNow;
           }
-          
-          /**
-           * calculate highest, lowest and latest
-           
-          var arr_response_all = [];
-          var arr_response_user = [];
-          console.log(user_responses['responses']);
-          console.log(arr_question_line);
-
-          for (var date in user_responses['responses']) {
-            for (var response in user_responses['responses'][date]) {
-              console.log(response);
-            }
-          }
-          */
 
           /**
            * get value by day of week
@@ -97,11 +83,6 @@ export default (firstDate, lastDate) => {
           var highest = 0; // max value
           var lowest = 0; // min value
           var latest  = 0; // last value answer
-
-          if (arr_option_list.length == 0) {
-            arr_option_list[0] = 'line';
-          }
-
           for (const option in arr_option_list) {
             arr_option_answer[arr_option_list[option]] = [];
             count_semana = 0;
@@ -112,18 +93,15 @@ export default (firstDate, lastDate) => {
               for (const question in arr_question_line) {
                 for (const answer in user_responses['responses'][date]) {
                   if (answer == arr_question_line[question]) {
-                    if (arr_option_list[option] == 'line') {
+                    if (arr_option_list[option] == 'count-more') {
                       suma_date = user_responses['responses'][date][answer].length;
-                    } else {
-                      if (is_lineal_number || arr_option_list.length == 1) {
-                        suma_date = suma_date + Number(user_responses['responses'][date][answer]); // get max value
-                      } else {
-                        if (user_responses['responses'][date][answer].toString() == option.toString()) {
-                          suma_date++; // get count the times they appear
-                        }
+                    } else if (arr_option_list[option] == 'sum') {
+                      suma_date = suma_date + Number(user_responses['responses'][date][answer]); // get max value
+                    }else{
+                      if (user_responses['responses'][date][answer].toString() == option.toString()) {
+                        suma_date++; // get count the times they appear
                       }
                     }
-
                   }
                 }
               }
