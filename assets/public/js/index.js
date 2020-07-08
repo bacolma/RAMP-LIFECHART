@@ -3,7 +3,6 @@ import initForms from './forms/index';
 
 function init() {
   if (RAMP_ASSESSMENT.post_type === 'ramp_assessment') {
-    console.log('ENTREEEEEEEEEEEE ASSESSMENT');
     try {
       initGraphic();
     } catch (error) {
