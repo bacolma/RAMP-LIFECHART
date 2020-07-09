@@ -1,6 +1,7 @@
 import initLine from './line';
 import initPie from './pie';
 import initBar from './bar';
+import initEmpty from './empty';
 import moment from 'moment-timezone';
 const $ = jQuery;
 
@@ -107,5 +108,6 @@ export default () => {
   initLine(firstDate, lastDate);
   initPie(firstDate, lastDate);
   initBar(firstDate, lastDate);
+  initEmpty(firstDate, lastDate);
   setDatePicker();
 };
