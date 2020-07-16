@@ -96,7 +96,10 @@ export default (firstDate, lastDate) => {
                     if (arr_option_list[option] == 'count-more') {
                       suma_date = user_responses['responses'][date][answer].length;
                     } else if (arr_option_list[option] == 'sum') {
-                      suma_date = suma_date + Number(user_responses['responses'][date][answer]); // get max value
+                      var num = parseInt(user_responses['responses'][date][answer],10);
+                      if(!isNaN(num)){
+                        suma_date = suma_date + Number(user_responses['responses'][date][answer]); // get max value
+                      }
                     }else{
                       if (user_responses['responses'][date][answer].toString() == option.toString()) {
                         suma_date++; // get count the times they appear
