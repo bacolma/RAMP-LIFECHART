@@ -3,8 +3,10 @@ global $pagenow;
 
 $groups_items = [];
 $groups = learndash_get_groups();
-foreach( $groups as $term ){
-    $groups_items[$term->ID] = $term->post_title;
+if(is_array($groups)){
+    foreach( $groups as $term ){
+        $groups_items[$term->ID] = $term->post_title;
+    }
 }
 
 if( Functions::is_active_plugin_by_name( 'quform.php' ) ){

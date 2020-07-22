@@ -237,7 +237,7 @@ class RampAssessment {
                 $user_responses_serialized = maybe_unserialize( $user_responses );
                 $has_response_today = isset( $user_responses_serialized[$page_id][$form_id]['responses'][$current_date] );
 
-                if( ! $has_response_today && $_GET['start'] == 'now' ){
+                if( ! $has_response_today && isset($_GET['start']) && $_GET['start'] == 'now' ){
                     include_once 'html_includes/assessment/assessment_form.php';
                 } else{
                     $description = $xbox->get_field_value( 'description', '', '' );
