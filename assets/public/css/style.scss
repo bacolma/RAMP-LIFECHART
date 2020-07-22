@@ -40,14 +40,24 @@ $blue: #25335a;
         margin-left: 25px;
         display: block;
 
+        &:after {
+          font-size: 35px;
+          position: absolute;
+          top: 0;
+          left: -25px;
+          width: 20px;
+          height: 20px;
+          color: #44b4b8;
+        }
+
         &:before {
           position: absolute;
-          top: 5px;
+          top: 6px;
           left: -25px;
           content: "";
           width: 18px;
           height: 18px;
-          border: 2px solid $blue;
+          border: 2px solid black;
           border-radius: 2px;
         }
       }
@@ -58,6 +68,10 @@ $blue: #25335a;
         &:checked + label {
           color: #44b4b8;
 
+          &:after {
+            content: '✔';
+          }
+
           &:before {
             border-color: #44b4b8;
           }
@@ -65,31 +79,11 @@ $blue: #25335a;
       }
     }
 
-    .quform-inner.quform-inner-radio {
-      .quform-options {
-        .quform-option {
-          text-align: left;
-          width: 100%;
-        }
-      }
-
-      input {
-        display: none;
-
-        &:checked + label {
-          color: #d82020;
-
-          &:before {
-            border-color: #d82020;
-          }
-        }
-      }
-    }
   }
 
   .quform-button-submit {
     .quform-submit,
-    .quform_submit{
+    .quform_submit {
       background: #eb4745 !important;
       padding: 14px 15px !important;
       text-align: center;
@@ -217,11 +211,12 @@ $blue: #25335a;
     }
   }
 
-  #weeklyDatePicker{
+  #weeklyDatePicker {
     border: 0px;
     cursor: pointer;
   }
-  .picker__button--close{
+
+  .picker__button--close {
     width: 100%;
     background: #EB4745;
     color: white;
@@ -229,52 +224,63 @@ $blue: #25335a;
     border-color: #EB4745;
     margin-bottom: 15px;
 
-    &:hover{
+    &:hover {
       background: #EB4745;
       border-color: #EB4745;
       color: white;
     }
   }
-  .picker__button--today{
+
+  .picker__button--today {
     display: none;
   }
-  .picker__button--clear{
+
+  .picker__button--clear {
     display: none;
   }
-  .picker__button--close:before{
+
+  .picker__button--close:before {
     content: "";
   }
-  .picker__box{
+
+  .picker__box {
     background: #25335A;
     color: white;
   }
-  .picker__day--today:before{
+
+  .picker__day--today:before {
     border-left: 0px;
   }
-  .picker__year, .picker__month{
+
+  .picker__year, .picker__month {
     color: white;
     font-size: 1em;
     font-style: normal;
   }
-  .picker__nav--prev{
+
+  .picker__nav--prev {
     border-radius: 30px;
     background: #C7CCD4;
     margin-left: 20px;
     padding: 11px 13px 11px 11px;
   }
-  .picker__nav--next{
+
+  .picker__nav--next {
     border-radius: 30px;
     background: #C7CCD4;
     margin-right: 20px;
     padding: 11px 11px 11px 13px;
   }
-  .picker__weekday{
+
+  .picker__weekday {
     text-transform: uppercase;
   }
-  .picker__day--outfocus{
-    color:#717684;
+
+  .picker__day--outfocus {
+    color: #717684;
   }
-  .picker__day{
+
+  .picker__day {
     font-size: 18px;
   }
 }
@@ -400,7 +406,7 @@ $blue: #25335a;
         color: #165a6b;
       }
 
-      input{
+      input {
         background: transparent;
       }
     }
