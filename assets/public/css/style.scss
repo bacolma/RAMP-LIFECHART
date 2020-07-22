@@ -194,6 +194,10 @@ $blue: #25335a;
       @media (max-width: 320px) {
         padding: 10px 20px;
       }
+      
+      &.quform-back{
+        background: gray;
+      }
     }
   }
 
@@ -411,4 +415,12 @@ $blue: #25335a;
       }
     }
   }
+}
+
+.learndash-wrapper .learndash-complete .ld-item-list-item-preview .ld-item-title>span:first-child{
+  text-decoration: none !important;
+  color: gray !important;
+}
+.bb-completed-item{
+  text-decoration: none !important;
 }
