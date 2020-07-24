@@ -80,6 +80,65 @@ if( Functions::is_active_plugin_by_name( 'quform.php' ) ){
                 'items' => $forms_ids,
             ] );
 
+            $xbox->add_field( [
+                'id' => 'show_results',
+                'name' => __( 'Show Results?', RAMP_ASSESSMENT_TEXT_DOMAIN ),
+                'type' => 'radio',
+                'default' => 'no',
+                'items' => [
+                    'no' => 'No',
+                    'yes' => 'Yes',
+                ],
+            ] );
+
+            $group01 = $xbox->add_group( array(
+                'name' => 'Score',
+                'id' => 'score',
+                'options' => array(
+                    'add_item_text' => __('New Score', RAMP_ASSESSMENT_TEXT_DOMAIN),
+                    'show_if' => [ "show_results", '==', 'yes' ]
+                ),
+                'controls' => array(
+                    'name' => 'Score #'
+                )
+            ));
+            $group01->add_field(array(
+                'id' => 'score_label',
+                'name' => __( 'Label', RAMP_ASSESSMENT_TEXT_DOMAIN ),
+                'type' => 'text',
+            ));
+
+            $group01->add_field( [
+                'id' => 'score_min_value' ,
+                'name' => __( 'Min' , RAMP_ASSESSMENT_TEXT_DOMAIN ) ,
+                'type' => 'number' ,
+                'default' => 0 ,
+                'options' => [
+                    'unit' => 'PT' ,
+                    'show_unit' => true ,
+                    'show_spinner' => true ,
+                ] , 'attributes' => [
+                    'min' => 0 ,
+                    'step' => 1 ,
+                    'precision' => 0 ,
+                ] ,
+            ] );
+            $group01->add_field( [
+                'id' => 'score_max_value' ,
+                'name' => __( 'Max' , RAMP_ASSESSMENT_TEXT_DOMAIN ) ,
+                'type' => 'number' ,
+                'default' => 0 ,
+                'options' => [
+                    'unit' => 'PT' ,
+                    'show_unit' => true ,
+                    'show_spinner' => true ,
+                ] , 'attributes' => [
+                    'min' => 0 ,
+                    'step' => 1 ,
+                    'precision' => 0 ,
+                ] ,
+            ] );
+
             foreach( $forms as $form_id => $form ){
                 $group = $xbox->add_group( array(
                     'name' => 'Charts',

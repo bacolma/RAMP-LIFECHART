@@ -4,6 +4,11 @@
         <span class="last_completed__text">Last Completed: <?= $this->get_last_completed_date_of_form( $user_responses_serialized, get_the_ID() ) ?></span>
     </div>
     <div class="ramp_assessment_page__content">
+        <? if( $show_results == 'yes' ): ?>
+        <div id="show-results">
+            Low level of risk
+        </div>
+        <? endif; ?>
         <div class="ramp_assessment_page__detail">
             <div class='entry-title' id='result_score_day'></div>
             <? if( $description != '' ): ?>
@@ -26,7 +31,9 @@
     </div>
 </div>
 <script>
+  var score_levels = <?= isset( $score_levels ) ? $score_levels : '[]' ?>;
   var user_responses = <?=! is_null( $response_json ) ? $response_json : '[]' ?>;
   var charts = <?= ! is_null( $charts_json ) ? $charts_json : '[]' ?>;
   var data_form = <?= ! is_null( $data_forms_json ) ? $data_forms_json : '[]' ?>;
+  
 </script>

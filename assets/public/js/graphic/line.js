@@ -15,9 +15,9 @@ export default (firstDate, lastDate) => {
      */
     var arr_question_line = [];
     var arr_option_list = [];
-    var is_lineal_number = false;
     var is_legend = true;
     var title_char = "";
+    var score_current = 0;
     if (charts) {
       charts.forEach(function (item, index_char, array) {
         if (item['type'] == 'line') {
@@ -83,6 +83,7 @@ export default (firstDate, lastDate) => {
           var highest = 0; // max value
           var lowest = 0; // min value
           var latest  = 0; // last value answer
+          var dateCurrent = moment().format('MM-DD-YYYY');
           for (const option in arr_option_list) {
             arr_option_answer[arr_option_list[option]] = [];
             count_semana = 0;
@@ -133,6 +134,11 @@ export default (firstDate, lastDate) => {
                 latest = suma_date;
               }
 
+              //get score level
+              if(dateCurrent == date){
+                score_current = suma_date;
+              }
+
               count_semana++;
             }
           }
@@ -143,6 +149,20 @@ export default (firstDate, lastDate) => {
           $('.highest').html(highest);
           $('.lowest').html(lowest);
           $('.latest').html(latest);
+
+
+          /**
+           * Print Result Score Levels
+           */
+          if(score_current > 0) {
+            score_levels.forEach(level => {
+              if(level.min < score_current && level.max > score_current){
+                $("#show-results").html(level.text);
+              }
+            });
+          } else {
+            $("#show-results").css('display','none');
+          }
 
           /**
            * Get array text highchart

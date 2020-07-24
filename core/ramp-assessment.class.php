@@ -240,6 +240,19 @@ class RampAssessment {
                 if( ! $has_response_today && isset($_GET['start']) && $_GET['start'] == 'now' ){
                     include_once 'html_includes/assessment/assessment_form.php';
                 } else{
+                    $show_results = $xbox->get_field_value( 'show_results', $page_id, [] );
+                    if($show_results == 'yes'){
+                        $show_results_scores = $xbox->get_field_value( 'score', $page_id, [] );
+                        $score_levels = [];
+                        foreach( $show_results_scores as $show_results_score ){
+                            $score_levels[] = [
+                                'text' => $show_results_score['score_label'],
+                                'min' => $show_results_score['score_min_value'],
+                                'max' => $show_results_score['score_max_value'],
+                            ];
+                        }
+                        $score_levels = json_encode( $score_levels );
+                    }
                     $description = $xbox->get_field_value( 'description', '', '' );
                     $data_forms = QuestionnairePage::get_questions_and_options_of_forms( true );
                     if( isset( $user_responses_serialized[$page_id][$form_id] ) ){
