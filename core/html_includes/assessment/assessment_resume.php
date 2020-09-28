@@ -6,7 +6,6 @@
     <div class="ramp_assessment_page__content">
         <? if( $show_results == 'yes' ): ?>
         <div id="show-results">
-            Low level of risk
         </div>
         <? endif; ?>
         <div class="ramp_assessment_page__detail">
