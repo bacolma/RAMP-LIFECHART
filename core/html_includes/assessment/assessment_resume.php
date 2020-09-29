@@ -1,7 +1,7 @@
 <div class="ramp_assessment_page">
     <div class="ramp_assessment_page__header">
         <span class="options__text"><?= get_the_title() ?></span>
-        <span class="last_completed__text">Last Completed: <?= $this->get_last_completed_date_of_form( $user_responses_serialized, get_the_ID() ) ?></span>
+        <span class="last_completed__text">Last Completed: <?= $date_last_completed ?></span>
     </div>
     <div class="ramp_assessment_page__content">
         <? if( $show_results == 'yes' ): ?>

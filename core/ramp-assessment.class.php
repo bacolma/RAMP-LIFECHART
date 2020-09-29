@@ -106,32 +106,28 @@ class RampAssessment {
      * Get last complete date of form of symptom diary
      *
      * @param $users_responses
-     * @param $page_id
+     * @param $form_id
      *
      * @return string
      * @since Ramp assessment 0.0.2
      */
 
-    private function get_last_completed_date_of_form( $users_responses, $page_id ){
+    private function get_last_completed_date_of_form( $users_responses, $form_id ){
         $date = '--';
-        if( isset( $users_responses[$page_id] ) ){
-            $forms = $users_responses[$page_id];
-            if( is_array( $forms ) ){
-                $last_response = '--';
-                foreach( $forms as $form ){
-                    $count = 0;
-                    $sizeResponses = count( $form['responses'] );
-                    foreach( $form['responses'] as $date => $response ){
-                        $count += 1;
-                        if( $count == $sizeResponses ){
-                            $last_response = $date;
-                        }
-                    }
+        if( isset( $users_responses ) ){
+            $form = $users_responses[$form_id];
+            $count = 0;
+            $sizeResponses = count( $form['responses'] );
+            $last_response = '--';
+            foreach( $form['responses'] as $date => $response ){
+                $count += 1;
+                if( $count == $sizeResponses ){
+                    $last_response = $date;
                 }
-                if( $last_response != '--' ){
-                    date_default_timezone_set( 'America/Vancouver' );
-                    $date = date_create_from_format( 'm-d-Y', $last_response )->format( 'M/d/Y' );
-                }
+            }
+            if( $last_response != '--' ){
+                date_default_timezone_set( 'America/Vancouver' );
+                $date = date_create_from_format( 'm-d-Y', $last_response )->format( 'M/d/Y' );
             }
         }
         return $date;
@@ -171,12 +167,13 @@ class RampAssessment {
                 $first_group = $groups[0];
                 $user_responses = get_user_meta( $user_id, 'ramp_assessment', true );
                 $user_responses_serialized = maybe_unserialize( $user_responses );
-                foreach( $ramp_assessment_list as $key => $diary ){
-                    $position = $xbox->get_field_value( 'position', $diary->ID, $key );
-                    $student_groups = $xbox->get_field_value( 'student-group', $diary->ID, [] );
+                foreach( $ramp_assessment_list as $key => $assesment ){
+                    $position = $xbox->get_field_value( 'position', $assesment->ID, $key );
+                    $student_groups = $xbox->get_field_value( 'student-group', $assesment->ID, [] );
                     if( array_search( $first_group, $student_groups ) !== false ){
-                        $ramp_assessment[$position]['post'] = $diary;
-                        $ramp_assessment[$position]['date'] = $this->get_last_completed_date_of_form( $user_responses_serialized, $diary->ID );
+                        $ramp_assessment[$position]['post'] = $assesment;
+                        $form_id = $xbox->get_field_value( 'form', $assesment->ID, 0 );
+                        $ramp_assessment[$position]['date'] = $this->get_last_completed_date_of_form( $user_responses_serialized, $form_id );
                     }
                 }
                 ksort( $ramp_assessment );
@@ -235,13 +232,13 @@ class RampAssessment {
                 $current_date = date( 'm-d-Y', time() );
                 $user_responses = get_user_meta( $user_id, 'ramp_assessment', true );
                 $user_responses_serialized = maybe_unserialize( $user_responses );
-                $has_response_today = isset( $user_responses_serialized[$page_id][$form_id]['responses'][$current_date] );
+                $has_response_today = isset( $user_responses_serialized[$form_id]['responses'][$current_date] );
 
-                if( ! $has_response_today && isset($_GET['start']) && $_GET['start'] == 'now' ){
+                if( ! $has_response_today && isset( $_GET['start'] ) && $_GET['start'] == 'now' ){
                     include_once 'html_includes/assessment/assessment_form.php';
                 } else{
                     $show_results = $xbox->get_field_value( 'show_results', $page_id, [] );
-                    if($show_results == 'yes'){
+                    if( $show_results == 'yes' ){
                         $show_results_scores = $xbox->get_field_value( 'score', $page_id, [] );
                         $score_levels = [];
                         foreach( $show_results_scores as $show_results_score ){
@@ -254,9 +251,10 @@ class RampAssessment {
                         $score_levels = json_encode( $score_levels );
                     }
                     $description = $xbox->get_field_value( 'description', '', '' );
+                    $date_last_completed = $this->get_last_completed_date_of_form( $user_responses_serialized, $form_id );
                     $data_forms = QuestionnairePage::get_questions_and_options_of_forms( true );
-                    if( isset( $user_responses_serialized[$page_id][$form_id] ) ){
-                        $response_json = isset( $user_responses_serialized[$page_id][$form_id] ) ? json_encode( $user_responses_serialized[$page_id][$form_id] ) : '{}';
+                    if( isset( $user_responses_serialized[$form_id] ) ){
+                        $response_json = isset( $user_responses_serialized[$form_id] ) ? json_encode( $user_responses_serialized[$form_id] ) : '{}';
                         $charts_json = json_encode( $charts_data );
                         $data_forms_json = json_encode( $data_forms[$form_id] );
                     }
@@ -325,8 +323,8 @@ class RampAssessment {
             }
         }
         // 1 . Existe el indice con el id de formulario?
-        if( ! isset( $user_responses_serialized[$page_id] ) || $user_responses_serialized == '' ){
-            $user_data[$page_id] = [
+        if( ! isset( $user_responses_serialized ) || $user_responses_serialized == '' ){
+            $user_data = [
                 "{$form_id}" => [
                     'responses' => [
                         "$current_date" => $response
@@ -336,8 +334,8 @@ class RampAssessment {
             update_user_meta( $user->ID, 'ramp_assessment', serialize( $user_data ) );
         } else{
             // El formulario existe y verificar que en los resposne no exista un key con la fecha actual
-            if( ! isset( $user_responses_serialized[$page_id][$form_id]['responses'][$current_date] ) ){
-                $user_responses_serialized[$page_id][$form_id]['responses'][$current_date] = $response;
+            if( ! isset( $user_responses_serialized[$form_id]['responses'][$current_date] ) ){
+                $user_responses_serialized[$form_id]['responses'][$current_date] = $response;
                 update_user_meta( $user->ID, 'ramp_assessment', serialize( $user_responses_serialized ) );
             }
         }
