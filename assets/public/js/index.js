@@ -2,7 +2,7 @@ import initGraphic from './graphic/index';
 import initForms from './forms/index';
 
 function init() {
-  if (RAMP_ASSESSMENT.post_type === 'ramp_assessment') {
+  if (RAMP_LIFECHART.post_type === 'ramp_lifechart') {
     try {
       initGraphic();
     } catch (error) {

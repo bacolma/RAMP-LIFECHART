@@ -11,33 +11,39 @@ export default () => {
   /**
   * Calcute days week
   */
-  var firstDate = moment().day(1).format('MM-DD-YYYY');
-  var lastDate = moment().day(7).format('MM-DD-YYYY');
+  var firstDate = moment().day(0).format('MM-DD-YYYY');
+  var lastDate = moment().day(6).format('MM-DD-YYYY');
   var first = "";
   var second = "";
   var between_days = "";
   var firtload = true;
   var firstDateNew = "";
   var datepiker = "";
+  var week= true;
   const setDatePicker = () => {
-    
+    console.log('firstDate: '+firstDate);
+
     $("#weeklyDatePicker").val(firstDate + ' to ' +lastDate);
 
-    function style_select(firstDateNew, i, j) { 
-      if(i == 0){
-        $('#weeklyDatePicker_' + firstDateNew).css('background','#44B4B8');
-        $('#weeklyDatePicker_' + firstDateNew).css('border-radius', '20px');
-        $('#weeklyDatePicker_' + firstDateNew).parent('td').css('background','#1B97A2');
-        $('#weeklyDatePicker_' + firstDateNew).parent('td').css('border-radius', '20px 0px 0px 20px');
-      }else if(i == j){
-        $('#weeklyDatePicker_' + firstDateNew).css('background','#44B4B8');
-        $('#weeklyDatePicker_' + firstDateNew).css('border-radius', '20px');
-        $('#weeklyDatePicker_' + firstDateNew).parent('td').css('background','#1B97A2');
-        $('#weeklyDatePicker_' + firstDateNew).parent('td').css('border-radius', '0px 20px 20px 0px');
+    function style_select(firstDateNew, i, j) {     
+      if(j > 6){
+        /** valid more than 6 days*/
       }else{
-        $('#weeklyDatePicker_' + firstDateNew).parent('td').css('background','#1B97A2');
-      }
-    }
+        if(i == 0){
+          $('#weeklyDatePicker_' + firstDateNew).css('background','#44B4B8');
+          $('#weeklyDatePicker_' + firstDateNew).css('border-radius', '20px');
+          $('#weeklyDatePicker_' + firstDateNew).parent('td').css('background','#1B97A2');
+          $('#weeklyDatePicker_' + firstDateNew).parent('td').css('border-radius', '20px 0px 0px 20px');
+        }else if(i == j){
+          $('#weeklyDatePicker_' + firstDateNew).css('background','#44B4B8');
+          $('#weeklyDatePicker_' + firstDateNew).css('border-radius', '20px');
+          $('#weeklyDatePicker_' + firstDateNew).parent('td').css('background','#1B97A2');
+          $('#weeklyDatePicker_' + firstDateNew).parent('td').css('border-radius', '0px 20px 20px 0px');
+        }else{
+          $('#weeklyDatePicker_' + firstDateNew).parent('td').css('background','#1B97A2');
+        }
+      } 
+    } 
 
     function range_select(firstDate, firtload) {
       if(firtload){

@@ -150,6 +150,13 @@ export default (firstDate, lastDate) => {
           $('.lowest').html(lowest);
           $('.latest').html(latest);
 
+          /**
+           * Print Page
+           */
+          $('a.printPage').click(function(){
+            window.print();
+            return false;
+          });  
 
           /**
            * Print Result Score Levels

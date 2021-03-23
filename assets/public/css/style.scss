@@ -423,6 +423,140 @@ $blue: #25335a;
   }
 }
 
+.ramp_lifechart_page {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #bbbbbb;
+    margin-bottom: 20px;
+
+    .options__text {
+      color: #44b4b8;
+      font-size: 22px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .last_completed__text {
+      color: $blue;
+      font-size: 12px;
+    }
+  }
+
+  &__list {
+    &__item {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 0;
+      color: $blue;
+      position: relative;
+
+      :after {
+        content: "";
+        background: linear-gradient(
+                        90deg,
+                        rgba(246, 246, 246, 1) 0%,
+                        rgba(232, 232, 232, 1) 100%
+        );
+        display: block;
+        height: 2px;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
+
+      .symptom__text {
+        font-weight: bold;
+        font-size: 24px;
+      }
+
+      .date__text {
+        font-size: 13px;
+      }
+    }
+  }
+
+  &__detail {
+    #result_score_day {
+      background: white;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+
+
+    }
+
+    .detail {
+      &__description {
+        font-size: 14px;
+        text-align: justify;
+        color: $blue;
+        margin-bottom: 20px;
+      }
+
+      &__start {
+        background: #eb4745;
+        padding: 14px 15px;
+        text-align: center;
+        border-radius: 40px;
+        width: 100%;
+        display: block;
+        color: white;
+        text-transform: uppercase;
+      }
+    }
+
+
+    .chart-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+
+      div {
+        color: #25335A;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        span:first-child {
+          font-size: 20px;
+        }
+
+        span:last-child {
+          font-size: 11px;
+        }
+      }
+    }
+
+    #result_score_day__date {
+      font-size: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0;
+      color: $blue;
+
+
+      span {
+        margin-bottom: 5px;
+        margin-right: 10px;
+        color: #165a6b;
+      }
+
+      input {
+        background: transparent;
+      }
+    }
+  }
+  
+  #show-results{
+    padding-bottom: 20px;
+    font-size: 18px;
+    color: red;
+  }
+}
+
 .learndash-wrapper .learndash-complete .ld-item-list-item-preview .ld-item-title>span:first-child{
   text-decoration: none !important;
   color: gray !important;

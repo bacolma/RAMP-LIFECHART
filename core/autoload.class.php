@@ -1,4 +1,4 @@
-<?php namespace RampAssessment\Core;
+<?php namespace RampLifechart\Core;
 
 /**
  *  Class Autoload
